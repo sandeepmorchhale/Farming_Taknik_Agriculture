@@ -8,19 +8,7 @@ const CourseCard = ({ course, isEnrolled }) => {
   // Calculate discount percentage
   const discount = originalPrice && price ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0;
 
-  // Generate clean slug link based on course title
-  const getCourseSlug = (titleStr) => {
-    const title = titleStr.toLowerCase();
-    if (title.includes('capsicum') || title.includes('chilli') || title.includes('vegetable')) {
-      return '/course/capsicum';
-    }
-    if (title.includes('tomato')) {
-      return '/course/tomato';
-    }
-    return '/course/start-farming';
-  };
-
-  const courseLink = getCourseSlug(title);
+  const courseLink = `/course/${_id}`;
 
   return (
     <div className="premium-card animate-fade-in-up" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>

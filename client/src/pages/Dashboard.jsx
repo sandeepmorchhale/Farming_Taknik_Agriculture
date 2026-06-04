@@ -118,16 +118,6 @@ const Dashboard = ({ user, enrollments, courses }) => {
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }}>
               {recommendedCourses.map((c) => {
-                const getCourseSlug = (titleStr) => {
-                  const title = titleStr.toLowerCase();
-                  if (title.includes('capsicum') || title.includes('chilli') || title.includes('vegetable')) {
-                    return '/course/capsicum';
-                  }
-                  if (title.includes('tomato')) {
-                    return '/course/tomato';
-                  }
-                  return '/course/start-farming';
-                };
                 return (
                   <div key={c._id} className="premium-card" style={{ display: 'flex', flexDirection: 'column', height: '100%', backgroundColor: 'var(--bg-white)' }}>
                     <img src={c.thumbnail} alt={c.title} style={{ width: '100%', height: '160px', objectFit: 'cover' }} />
@@ -137,7 +127,7 @@ const Dashboard = ({ user, enrollments, courses }) => {
 
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', borderTop: '1px solid rgba(0,0,0,0.06)', paddingTop: '14px' }}>
                         <span style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--primary-dark)' }}>₹{c.price}</span>
-                        <Link to={getCourseSlug(c.title)} className="btn btn-secondary" style={{ padding: '6px 14px', fontSize: '0.8rem', borderColor: 'var(--primary-light)', color: 'var(--primary)' }}>
+                        <Link to={`/course/${c._id}`} className="btn btn-secondary" style={{ padding: '6px 14px', fontSize: '0.8rem', borderColor: 'var(--primary-light)', color: 'var(--primary)' }}>
                           View Details
                           <ArrowRight size={12} />
                         </Link>

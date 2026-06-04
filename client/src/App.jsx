@@ -119,16 +119,14 @@ const App = () => {
   return (
     <Router>
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--bg-light)' }}>
-        <Navbar user={user} onLogout={handleLogout} theme={theme} onToggleTheme={toggleTheme} />
+        <Navbar user={user} onLogout={handleLogout} theme={theme} onToggleTheme={toggleTheme} courses={courses} />
 
         <main style={{ flexGrow: 1 }}>
           <Routes>
             <Route path="/" element={<Home courses={courses} userEnrollments={userEnrollments} />} />
 
-            {/* Dynamic details for the three courses */}
-            <Route path="/course/capsicum" element={<CourseDetail courseName="Capsicum" courses={courses} token={token} user={user} userEnrollments={userEnrollments} refreshEnrollments={() => fetchUserEnrollments(token)} />} />
-            <Route path="/course/tomato" element={<CourseDetail courseName="Tomato" courses={courses} token={token} user={user} userEnrollments={userEnrollments} refreshEnrollments={() => fetchUserEnrollments(token)} />} />
-            <Route path="/course/start-farming" element={<CourseDetail courseName="Farming Business" courses={courses} token={token} user={user} userEnrollments={userEnrollments} refreshEnrollments={() => fetchUserEnrollments(token)} />} />
+            {/* Dynamic details for any course (resolves by ID or slug) */}
+            <Route path="/course/:courseId" element={<CourseDetail courses={courses} token={token} user={user} userEnrollments={userEnrollments} refreshEnrollments={() => fetchUserEnrollments(token)} />} />
 
             {/* Authentication */}
             <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <Login onLogin={handleLogin} />} />
@@ -148,7 +146,7 @@ const App = () => {
           </Routes>
         </main>
 
-        <Footer />
+        <Footer courses={courses} />
       </div>
     </Router>
   );

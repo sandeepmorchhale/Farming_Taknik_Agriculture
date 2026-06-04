@@ -26,6 +26,8 @@ const AdminDashboard = ({ token, courses, refreshCourses }) => {
 
   const [courseCreated, setCourseCreated] = useState(false);
   const [editingCourse, setEditingCourse] = useState(null);
+  const [imagePreview, setImagePreview] = useState('');
+  const [editImagePreview, setEditImagePreview] = useState('');
 
 
   // Fetch admin logs: enrollments list and contact forms
@@ -61,6 +63,18 @@ const AdminDashboard = ({ token, courses, refreshCourses }) => {
     setNewCourse({ ...newCourse, [e.target.name]: e.target.value });
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewCourse({ ...newCourse, image: reader.result });
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleAddCourse = async (e) => {
     e.preventDefault();
     try {
@@ -85,6 +99,7 @@ const AdminDashboard = ({ token, courses, refreshCourses }) => {
           duration: '6+ Hours',
           features: ['Beginner Friendly', 'Lifetime Access']
         });
+        setImagePreview('');
         await refreshCourses();
         setTimeout(() => setCourseCreated(false), 2000);
       } else {
@@ -116,6 +131,27 @@ const AdminDashboard = ({ token, courses, refreshCourses }) => {
     }
   };
 
+  const handleEditInputChange = (e) => {
+    setEditingCourse({ ...editingCourse, [e.target.name]: e.target.value });
+  };
+
+  const handleEditFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setEditingCourse({ ...editingCourse, image: reader.result });
+        setEditImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const startEditing = (c) => {
+    setEditingCourse(JSON.parse(JSON.stringify(c)));
+    setEditImagePreview(c.thumbnail || '');
+  };
+
   // Curriculum Management Handlers
   const handleUpdateCurriculum = async (e) => {
     e.preventDefault();
@@ -126,18 +162,19 @@ const AdminDashboard = ({ token, courses, refreshCourses }) => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ modules: editingCourse.modules })
+        body: JSON.stringify(editingCourse)
       });
       const json = await response.json();
       if (json.success) {
-        alert('Curriculum updated successfully!');
+        alert('Course details and curriculum updated successfully!');
         setEditingCourse(null);
+        setEditImagePreview('');
         await refreshCourses();
       } else {
-        alert(json.error || 'Failed to update curriculum.');
+        alert(json.error || 'Failed to update course.');
       }
     } catch (err) {
-      alert('Error updating curriculum. Connection failed.');
+      alert('Error updating course. Connection failed.');
     }
   };
 
@@ -289,7 +326,7 @@ const AdminDashboard = ({ token, courses, refreshCourses }) => {
                     </div>
                     <div style={{ display: 'flex', gap: '8px' }}>
                       <button
-                        onClick={() => setEditingCourse(JSON.parse(JSON.stringify(c)))}
+                        onClick={() => startEditing(c)}
                         style={{ padding: '8px', color: 'var(--primary)', background: 'none', cursor: 'pointer' }}
                         title="Manage Curriculum"
                       >
@@ -386,6 +423,22 @@ const AdminDashboard = ({ token, courses, refreshCourses }) => {
                   </div>
                 </div>
 
+                <div className="form-group">
+                  <label className="form-label">Course Thumbnail / Image (ImageKit)</label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    className="form-control"
+                    style={{ padding: '8px 12px' }}
+                  />
+                  {imagePreview && (
+                    <div style={{ marginTop: '10px' }}>
+                      <img src={imagePreview} alt="Preview" style={{ width: '120px', height: '80px', objectFit: 'cover', borderRadius: '4px' }} />
+                    </div>
+                  )}
+                </div>
+
                 <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '12px', marginTop: '10px' }} id="add-course-btn">
                   Publish Course
                 </button>
@@ -413,6 +466,102 @@ const AdminDashboard = ({ token, courses, refreshCourses }) => {
 
             <form onSubmit={handleUpdateCurriculum}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                {/* Course Details Editing Section */}
+                <div style={{ border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '20px', backgroundColor: 'var(--bg-light)', display: 'grid', gap: '16px' }}>
+                  <h5 style={{ fontSize: '1.1rem', color: 'var(--primary-dark)', margin: 0, borderBottom: '1px solid var(--border-color)', paddingBottom: '10px' }}>Course Information</h5>
+                  
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', flexWrap: 'wrap' }}>
+                    <div className="form-group" style={{ margin: 0 }}>
+                      <label className="form-label" style={{ fontSize: '0.85rem' }}>Course Title</label>
+                      <input
+                        type="text"
+                        name="title"
+                        required
+                        value={editingCourse.title}
+                        onChange={handleEditInputChange}
+                        className="form-control"
+                      />
+                    </div>
+                    <div className="form-group" style={{ margin: 0 }}>
+                      <label className="form-label" style={{ fontSize: '0.85rem' }}>Subtitle</label>
+                      <input
+                        type="text"
+                        name="subtitle"
+                        required
+                        value={editingCourse.subtitle}
+                        onChange={handleEditInputChange}
+                        className="form-control"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-group" style={{ margin: 0 }}>
+                    <label className="form-label" style={{ fontSize: '0.85rem' }}>Description</label>
+                    <textarea
+                      name="description"
+                      required
+                      rows="3"
+                      value={editingCourse.description}
+                      onChange={handleEditInputChange}
+                      className="form-control"
+                    ></textarea>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+                    <div className="form-group" style={{ margin: 0 }}>
+                      <label className="form-label" style={{ fontSize: '0.85rem' }}>Offer Price (₹)</label>
+                      <input
+                        type="number"
+                        name="price"
+                        required
+                        value={editingCourse.price}
+                        onChange={handleEditInputChange}
+                        className="form-control"
+                      />
+                    </div>
+                    <div className="form-group" style={{ margin: 0 }}>
+                      <label className="form-label" style={{ fontSize: '0.85rem' }}>Original Price (₹)</label>
+                      <input
+                        type="number"
+                        name="originalPrice"
+                        required
+                        value={editingCourse.originalPrice}
+                        onChange={handleEditInputChange}
+                        className="form-control"
+                      />
+                    </div>
+                    <div className="form-group" style={{ margin: 0 }}>
+                      <label className="form-label" style={{ fontSize: '0.85rem' }}>Duration</label>
+                      <input
+                        type="text"
+                        name="duration"
+                        required
+                        value={editingCourse.duration}
+                        onChange={handleEditInputChange}
+                        className="form-control"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-group" style={{ margin: 0 }}>
+                    <label className="form-label" style={{ fontSize: '0.85rem' }}>Course Thumbnail / Image (ImageKit)</label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleEditFileChange}
+                      className="form-control"
+                      style={{ padding: '8px 12px' }}
+                    />
+                    {editImagePreview && (
+                      <div style={{ marginTop: '10px' }}>
+                        <img src={editImagePreview} alt="Preview" style={{ width: '120px', height: '80px', objectFit: 'cover', borderRadius: '4px' }} />
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <h5 style={{ fontSize: '1.1rem', color: 'var(--primary-dark)', margin: '10px 0 0 0', borderBottom: '1px solid var(--border-color)', paddingBottom: '10px' }}>Curriculum Modules & Lessons</h5>
+
                 {(editingCourse.modules || []).map((mod, mIdx) => (
                   <div key={mIdx} style={{ border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '20px', backgroundColor: 'var(--bg-light)' }}>
                     <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap' }}>

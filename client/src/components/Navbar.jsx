@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, User, LogOut, ChevronDown, Award, Sun, Moon } from 'lucide-react';
 
-const Navbar = ({ user, onLogout, theme, onToggleTheme }) => {
+const Navbar = ({ user, onLogout, theme, onToggleTheme, courses = [] }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -32,11 +32,19 @@ const Navbar = ({ user, onLogout, theme, onToggleTheme }) => {
     navigate('/');
   };
 
+  const getShortName = (title) => {
+    if (title.includes('Capsicum') || title.includes('Chilli') || title.includes('Chili')) return 'Chilli Course';
+    if (title.includes('Tomato')) return 'Tomato Course';
+    if (title.includes('Business') || title.includes('Start')) return 'Start Farming';
+    return title.replace(' Cultivation Masterclass', '').replace(' Masterclass', '');
+  };
+
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Start Farming Patato', path: '/course/start-farming' },
-    { name: 'Chili Course', path: '/course/capsicum' },
-    { name: 'Tomato Course', path: '/course/tomato' }
+    ...courses.map(c => ({
+      name: getShortName(c.title),
+      path: `/course/${c._id}`
+    }))
   ];
 
   // Helper to check active tab

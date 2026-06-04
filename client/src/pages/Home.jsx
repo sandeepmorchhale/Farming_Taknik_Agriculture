@@ -77,18 +77,26 @@ const Home = ({ courses, userEnrollments }) => {
       {/* Hero Section */}
       <section className="hero-section" style={{ minHeight: '560px', display: 'flex', alignItems: 'center', position: 'relative' }}>
         <div className="container" style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: '30px' }}>
-          
+
           {/* Hero text and buttons container */}
           <div className="hero-content">
             <h1 style={{ color: 'var(--bg-white)', fontSize: '3.6rem', marginBottom: '16px', fontWeight: 800, lineHeight: '1.15', fontFamily: 'Outfit' }}>
-            Treat your fields <br />like factories.
+              Treat your fields <br />like factories.
             </h1>
-            
+
             <p className="hero-para">
-             "Get free videos recorded on real farms via the 
-             'Farming Taknik' YouTube channel. For advanced learning, explore our paid courses to farm hand-in-hand with industry professionals."
+              "Get free videos recorded on real farms via the
+              'Farming Taknik' YouTube channel. For advanced learning, explore our paid courses to farm hand-in-hand with industry professionals."
             </p>
-            
+
+            <div className="hero-mobile-image-wrapper">
+              <img 
+                src="/unnamed.webp" 
+                alt="Farming Taknik Mobile Preview" 
+                className="hero-mobile-image"
+              />
+            </div>
+
             {/* Action buttons row */}
             <div className="hero-buttons">
               {/* Google Play store badge */}
@@ -118,11 +126,11 @@ const Home = ({ courses, userEnrollments }) => {
 
           {/* Quick-links Courses Pills Row */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', width: '100%', marginTop: '30px' }} className="hero-bottom-cards">
-            {/* Capsicum Card */}
-            <Link to="/course/capsicum" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '16px 20px', borderRadius: '8px', backgroundColor: '#fff9f2', textDecoration: 'none', transition: 'var(--transition-normal)' }} className="hero-bottom-card">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#fff0d9', fontSize: '2rem' }}>🫑</div>
+            {/* Chilli Card */}
+            <Link to="/course/chilli" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '16px 20px', borderRadius: '8px', backgroundColor: '#fff9f2', textDecoration: 'none', transition: 'var(--transition-normal)' }} className="hero-bottom-card">
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#fff0d9', fontSize: '2rem' }}>🌶️</div>
               <div>
-                <h4 style={{ margin: 0, fontSize: '0.95rem', color: '#1b351e', fontWeight: 700 }}>Capsicum Farming</h4>
+                <h4 style={{ margin: 0, fontSize: '0.95rem', color: '#1b351e', fontWeight: 700 }}>Chilli Farming</h4>
                 <span style={{ fontSize: '0.75rem', color: '#666', fontWeight: 600 }}>Business Course</span>
               </div>
             </Link>
@@ -220,7 +228,7 @@ const Home = ({ courses, userEnrollments }) => {
             <p style={{ color: 'var(--text-color)', marginBottom: '28px', fontSize: '1.05rem', lineHeight: '1.7' }}>
               Today, with over **154K+ subscribers** on YouTube, we are dedicated to educating and equipping farmers with the knowledge of fertilizer schedules, crop planning, and nursery setups to make agriculture a highly rewarding business.
             </p>
-            
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <CheckCircle size={20} style={{ color: 'var(--primary-light)' }} />
@@ -328,27 +336,27 @@ const Home = ({ courses, userEnrollments }) => {
           {/* Videos Grid */}
           {feedTab === 'videos' && (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }}>
-              
+
               {/* Card 1 */}
               <div className="glass-panel premium-card" style={{ padding: '20px', backgroundColor: 'var(--bg-white)', borderRadius: 'var(--radius-lg)' }}>
-                <a 
-                  href="https://www.youtube.com/watch?v=KzD71h_520o" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  style={{ 
-                    position: 'relative', 
-                    display: 'block', 
-                    width: '100%', 
-                    paddingBottom: '56.25%', 
-                    marginBottom: '16px', 
-                    borderRadius: 'var(--radius-md)', 
+                <a
+                  href="https://www.youtube.com/watch?v=KzD71h_520o"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    position: 'relative',
+                    display: 'block',
+                    width: '100%',
+                    paddingBottom: '56.25%',
+                    marginBottom: '16px',
+                    borderRadius: 'var(--radius-md)',
                     overflow: 'hidden',
                     boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
-                  }} 
+                  }}
                   className="video-thumbnail-card"
                 >
-                  <img 
-                    src="https://img.youtube.com/vi/KzD71h_520o/hqdefault.jpg" 
+                  <img
+                    src="https://img.youtube.com/vi/KzD71h_520o/hqdefault.jpg"
                     alt="Sweet Potato Farming Guide"
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', transition: 'var(--transition-normal)' }}
                     className="video-img"
@@ -373,24 +381,24 @@ const Home = ({ courses, userEnrollments }) => {
 
               {/* Card 2 */}
               <div className="glass-panel premium-card" style={{ padding: '20px', backgroundColor: 'var(--bg-white)', borderRadius: 'var(--radius-lg)' }}>
-                <a 
-                  href="https://www.youtube.com/watch?v=J6iP6Jm9oJk" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  style={{ 
-                    position: 'relative', 
-                    display: 'block', 
-                    width: '100%', 
-                    paddingBottom: '56.25%', 
-                    marginBottom: '16px', 
-                    borderRadius: 'var(--radius-md)', 
+                <a
+                  href="https://www.youtube.com/watch?v=J6iP6Jm9oJk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    position: 'relative',
+                    display: 'block',
+                    width: '100%',
+                    paddingBottom: '56.25%',
+                    marginBottom: '16px',
+                    borderRadius: 'var(--radius-md)',
                     overflow: 'hidden',
                     boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
-                  }} 
+                  }}
                   className="video-thumbnail-card"
                 >
-                  <img 
-                    src="https://img.youtube.com/vi/J6iP6Jm9oJk/hqdefault.jpg" 
+                  <img
+                    src="https://img.youtube.com/vi/J6iP6Jm9oJk/hqdefault.jpg"
                     alt="Summer Crops Guide"
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', transition: 'var(--transition-normal)' }}
                     className="video-img"
@@ -415,24 +423,24 @@ const Home = ({ courses, userEnrollments }) => {
 
               {/* Card 3 */}
               <div className="glass-panel premium-card" style={{ padding: '20px', backgroundColor: 'var(--bg-white)', borderRadius: 'var(--radius-lg)' }}>
-                <a 
-                  href="https://www.youtube.com/watch?v=f9vT8d9Bv2k" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  style={{ 
-                    position: 'relative', 
-                    display: 'block', 
-                    width: '100%', 
-                    paddingBottom: '56.25%', 
-                    marginBottom: '16px', 
-                    borderRadius: 'var(--radius-md)', 
+                <a
+                  href="https://www.youtube.com/watch?v=f9vT8d9Bv2k"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    position: 'relative',
+                    display: 'block',
+                    width: '100%',
+                    paddingBottom: '56.25%',
+                    marginBottom: '16px',
+                    borderRadius: 'var(--radius-md)',
                     overflow: 'hidden',
                     boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
-                  }} 
+                  }}
                   className="video-thumbnail-card"
                 >
-                  <img 
-                    src="https://img.youtube.com/vi/f9vT8d9Bv2k/hqdefault.jpg" 
+                  <img
+                    src="https://img.youtube.com/vi/f9vT8d9Bv2k/hqdefault.jpg"
                     alt="Arbi Farming Guide"
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', transition: 'var(--transition-normal)' }}
                     className="video-img"
@@ -492,11 +500,11 @@ const Home = ({ courses, userEnrollments }) => {
           {/* Farmer Comments */}
           {feedTab === 'comments' && (
             <div className="comments-split">
-              
+
               {/* Left Column: Comments List */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <h4 style={{ fontSize: '1.2rem', color: 'var(--primary-dark)' }}>Farmer Q&A Discussion Board</h4>
-                
+
                 {comments.map((comm, idx) => (
                   <div key={idx} style={{ padding: '16px 20px', borderRadius: '8px', backgroundColor: 'var(--bg-light)', border: '1px solid var(--border-color)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
@@ -514,7 +522,7 @@ const Home = ({ courses, userEnrollments }) => {
               {/* Right Column: Add Comment Form */}
               <div className="glass-panel" style={{ padding: '24px', borderRadius: 'var(--radius-lg)', backgroundColor: 'var(--bg-white)', border: '1px solid var(--border-color)', height: 'fit-content' }}>
                 <h4 style={{ fontSize: '1.2rem', color: 'var(--primary-dark)', marginBottom: '16px' }}>Ask a Question</h4>
-                
+
                 <form onSubmit={handleCommentSubmit}>
                   <div className="form-group">
                     <label className="form-label" style={{ fontSize: '0.85rem' }}>Your Name</label>
@@ -581,9 +589,9 @@ const Home = ({ courses, userEnrollments }) => {
               placeholder="Enter your email address"
               className="newsletter-input"
             />
-            <button 
-              className="btn" 
-              style={{ 
+            <button
+              className="btn"
+              style={{
                 padding: '16px 24px',
                 background: 'var(--newsletter-btn-bg)',
                 color: 'var(--newsletter-btn-text)',

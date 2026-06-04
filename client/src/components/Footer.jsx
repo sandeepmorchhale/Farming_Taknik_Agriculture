@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Youtube, Instagram, Facebook, Twitter, MessageSquare, Mail, MapPin } from 'lucide-react';
 
-const Footer = () => {
+const Footer = ({ courses = [] }) => {
   return (
     <footer style={{ 
       backgroundColor: 'var(--footer-bg)', 
@@ -38,14 +38,18 @@ const Footer = () => {
             </a>
           </div>
         </div>
-
+ 
         {/* Top-Rated Courses Column */}
         <div>
           <h4 style={{ color: 'var(--footer-title)', marginBottom: '20px', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Masterclass Programs</h4>
           <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.9rem', padding: 0 }}>
-            <li><Link to="/course/capsicum" style={{ color: 'var(--footer-text)', transition: 'var(--transition-fast)' }} className="footer-link">Chilli & Vegetable Masterclass</Link></li>
-            <li><Link to="/course/tomato" style={{ color: 'var(--footer-text)', transition: 'var(--transition-fast)' }} className="footer-link">Tomato Farming Masterclass</Link></li>
-            <li><Link to="/course/start-farming" style={{ color: 'var(--footer-text)', transition: 'var(--transition-fast)' }} className="footer-link">Sweet Potato Farming Masterclass</Link></li>
+            {courses.map(c => (
+              <li key={c._id}>
+                <Link to={`/course/${c._id}`} style={{ color: 'var(--footer-text)', transition: 'var(--transition-fast)' }} className="footer-link">
+                  {c.title}
+                </Link>
+              </li>
+            ))}
             <li><Link to="/login" style={{ color: 'var(--footer-text)', transition: 'var(--transition-fast)' }} className="footer-link">Course Dashboard Login</Link></li>
           </ul>
         </div>

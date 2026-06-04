@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useParams } from 'react-router-dom';
 import { Clock, Play, BookOpen, Star, CheckCircle, Lock, Shield, Award, HelpCircle, CreditCard } from 'lucide-react';
 
-const CourseDetail = ({ courseName, courses, token, user, userEnrollments, refreshEnrollments }) => {
+const CourseDetail = ({ courses, token, user, userEnrollments, refreshEnrollments }) => {
   const navigate = useNavigate();
+  const { courseId } = useParams();
   const [showCheckout, setShowCheckout] = useState(false);
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -11,20 +12,22 @@ const CourseDetail = ({ courseName, courses, token, user, userEnrollments, refre
   const [cardExpiry, setCardExpiry] = useState('');
   const [cardCvv, setCardCvv] = useState('');
 
-  // Find course matching the name prop
+  // Find course matching ID or legacy slug
   const course = courses.find(c => {
+    if (c._id === courseId) return true;
+    
     const title = c.title.toLowerCase();
-    const query = courseName.toLowerCase();
-    if (query === 'capsicum') {
-      return title.includes('capsicum') || title.includes('chilli') || title.includes('vegetable');
+    const slug = courseId ? courseId.toLowerCase() : '';
+    if (slug === 'chilli' || slug === 'capsicum') {
+      return title.includes('capsicum') || title.includes('chilli') || title.includes('chili') || title.includes('vegetable');
     }
-    if (query === 'tomato') {
+    if (slug === 'tomato') {
       return title.includes('tomato');
     }
-    if (query === 'farming business') {
+    if (slug === 'start-farming') {
       return title.includes('business') || title.includes('start') || title.includes('potato');
     }
-    return title.includes(query);
+    return false;
   });
 
   useEffect(() => {
