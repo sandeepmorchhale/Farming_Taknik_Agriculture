@@ -49,6 +49,29 @@
   --course-hero-price: #ffffff;
   --course-hero-original-price: rgba(255, 255, 255, 0.5);
 
+  /* Homepage Hero Section Variables - Light Theme */
+  --hero-bg-gradient: linear-gradient(to right,
+      #eaf5ec 0%,
+      #d4edda 35%,
+      rgba(212, 237, 218, 0.9) 50%,
+      rgba(212, 237, 218, 0.3) 70%,
+      rgba(212, 237, 218, 0) 90%);
+  --hero-title-color: #1b351e;
+  --hero-para-color: #2b442e;
+  --hero-card-bg: rgba(255, 255, 255, 0.9);
+  --hero-card-hover-bg: #ffffff;
+  --hero-card-title: #1b351e;
+  --hero-card-subtitle: #4c6850;
+  --hero-card-icon-bg: #c3e6cb;
+  --hero-card-border: rgba(45, 106, 79, 0.15);
+  --hero-card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  --hero-btn-login-bg: var(--primary);
+  --hero-btn-login-text: #ffffff;
+  --hero-btn-login-hover: var(--primary-dark);
+  --hero-bg-mobile: linear-gradient(to bottom,
+      rgba(234, 245, 236, 0.95) 0%,
+      rgba(212, 237, 218, 0.98) 100%);
+
 
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.02);
@@ -116,6 +139,29 @@
   --course-hero-title: #ecfdf5;
   --course-hero-price: #34d399;
   --course-hero-original-price: #64748b;
+
+  /* Homepage Hero Section Variables - Dark Theme */
+  --hero-bg-gradient: linear-gradient(to right,
+      #09120b 0%,
+      #0e2213 35%,
+      rgba(14, 34, 19, 0.9) 50%,
+      rgba(14, 34, 19, 0.3) 70%,
+      rgba(14, 34, 19, 0) 90%);
+  --hero-title-color: #ffffff;
+  --hero-para-color: #cbd5e1;
+  --hero-card-bg: rgba(14, 18, 15, 0.85);
+  --hero-card-hover-bg: rgba(20, 26, 21, 0.95);
+  --hero-card-title: #34d399;
+  --hero-card-subtitle: #94a3b8;
+  --hero-card-icon-bg: #12281a;
+  --hero-card-border: rgba(52, 211, 153, 0.2);
+  --hero-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --hero-btn-login-bg: var(--primary);
+  --hero-btn-login-text: #ffffff;
+  --hero-btn-login-hover: var(--primary-light);
+  --hero-bg-mobile: linear-gradient(to bottom,
+      rgba(9, 18, 11, 0.92) 0%,
+      rgba(14, 34, 19, 0.96) 100%);
 
 
   /* Shadows */
@@ -382,16 +428,12 @@ select {
 /* Main Hero section */
 .hero-section {
   position: relative;
-  background: linear-gradient(to right,
-      #18411d 0%,
-      #1f5225 35%,
-      rgba(31, 82, 37, 0.9) 50%,
-      rgba(31, 82, 37, 0.3) 70%,
-      rgba(177, 200, 179, 0) 90%), url('/hero-logol.webp') no-repeat right center;
+  background: var(--hero-bg-gradient), url('/hero-logol.webp') no-repeat right center;
   background-size: cover;
-  color: var(--bg-white);
+  color: var(--hero-para-color);
   padding: 80px 0 120px 0;
   overflow: hidden;
+  transition: var(--transition-normal);
 }
 
 .hero-content {
@@ -401,11 +443,71 @@ select {
 
 .hero-para {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.95);
+  color: var(--hero-para-color);
   margin-bottom: 32px;
   font-weight: 400;
   line-height: 1.6;
   max-width: 480px;
+  transition: var(--transition-normal);
+}
+
+/* Hero Bottom Card styles */
+.hero-bottom-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background-color: var(--hero-card-bg);
+  border: 1px solid var(--hero-card-border);
+  box-shadow: var(--hero-card-shadow);
+  text-decoration: none;
+  transition: var(--transition-normal);
+}
+
+.hero-bottom-card:hover {
+  transform: translateY(-4px);
+  background-color: var(--hero-card-hover-bg);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-color: var(--primary-light);
+}
+
+.hero-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--hero-card-icon-bg);
+  font-size: 1.8rem;
+  transition: var(--transition-fast);
+}
+
+.hero-bottom-card h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--hero-card-title);
+  font-weight: 700;
+  transition: var(--transition-fast);
+}
+
+.hero-bottom-card span {
+  font-size: 0.75rem;
+  color: var(--hero-card-subtitle);
+  font-weight: 600;
+  transition: var(--transition-fast);
+}
+
+#hero-login-btn {
+  background-color: var(--hero-btn-login-bg) !important;
+  color: var(--hero-btn-login-text) !important;
+  transition: var(--transition-normal);
+}
+
+#hero-login-btn:hover {
+  background-color: var(--hero-btn-login-hover) !important;
+  transform: translateY(-2px);
 }
 
 .hero-mobile-image-wrapper {
@@ -610,9 +712,7 @@ select {
   }
 
   .hero-section {
-    background: linear-gradient(to bottom,
-        rgba(24, 65, 29, 0.92) 0%,
-        rgba(24, 65, 29, 0.96) 100%), url('/hero-logol.webp') no-repeat center center !important;
+    background: var(--hero-bg-mobile), url('/hero-logol.webp') no-repeat center center !important;
     background-size: cover !important;
     padding: 60px 0 80px 0 !important;
     text-align: center;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CourseCard from '../components/CourseCard';
-import { Sprout, TrendingUp, Users, Play, Award, CheckCircle, ShieldCheck, Mail, Send, Youtube } from 'lucide-react';
+import { Sprout, TrendingUp, Users, Play, Award, CheckCircle, ShieldCheck, Mail, Send, Youtube, LogIn } from 'lucide-react';
 
 const Home = ({ courses, userEnrollments }) => {
   useEffect(() => {
@@ -80,7 +80,7 @@ const Home = ({ courses, userEnrollments }) => {
 
           {/* Hero text and buttons container */}
           <div className="hero-content">
-            <h1 style={{ color: 'var(--bg-white)', fontSize: '3.6rem', marginBottom: '16px', fontWeight: 800, lineHeight: '1.15', fontFamily: 'Outfit' }}>
+            <h1 style={{ color: 'var(--hero-title-color)', fontSize: '3.6rem', marginBottom: '16px', fontWeight: 800, lineHeight: '1.15', fontFamily: 'Outfit', transition: 'var(--transition-normal)' }}>
               Treat your fields <br />like factories.
             </h1>
 
@@ -118,8 +118,9 @@ const Home = ({ courses, userEnrollments }) => {
               </a>
 
               {/* LOG IN button */}
-              <Link to="/login" className="btn" style={{ backgroundColor: '#ffffff', color: '#16331c', padding: '12px 28px', borderRadius: '8px', fontWeight: 700, textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em', boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }} id="hero-login-btn">
-                Log In
+              <Link to="/login" className="btn" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 28px', borderRadius: '8px', fontWeight: 700, textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em', boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }} id="hero-login-btn">
+                <LogIn size={18} />
+                <span>Log In</span>
               </Link>
             </div>
           </div>
@@ -127,29 +128,29 @@ const Home = ({ courses, userEnrollments }) => {
           {/* Quick-links Courses Pills Row */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', width: '100%', marginTop: '30px' }} className="hero-bottom-cards">
             {/* Chilli Card */}
-            <Link to="/course/chilli" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '16px 20px', borderRadius: '8px', backgroundColor: '#fff9f2', textDecoration: 'none', transition: 'var(--transition-normal)' }} className="hero-bottom-card">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#fff0d9', fontSize: '2rem' }}>🌶️</div>
+            <Link to="/course/chilli" className="hero-bottom-card">
+              <div className="hero-card-icon">🌶️</div>
               <div>
-                <h4 style={{ margin: 0, fontSize: '0.95rem', color: '#1b351e', fontWeight: 700 }}>Chilli Farming</h4>
-                <span style={{ fontSize: '0.75rem', color: '#666', fontWeight: 600 }}>Business Course</span>
+                <h4>Chilli Farming</h4>
+                <span>Business Course</span>
               </div>
             </Link>
 
             {/* Tomato Card */}
-            <Link to="/course/tomato" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '16px 20px', borderRadius: '8px', backgroundColor: '#fff5f5', textDecoration: 'none', transition: 'var(--transition-normal)' }} className="hero-bottom-card">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#ffe5e5', fontSize: '2rem' }}>🍅</div>
+            <Link to="/course/tomato" className="hero-bottom-card">
+              <div className="hero-card-icon">🍅</div>
               <div>
-                <h4 style={{ margin: 0, fontSize: '0.95rem', color: '#1b351e', fontWeight: 700 }}>Tomato Farming</h4>
-                <span style={{ fontSize: '0.75rem', color: '#666', fontWeight: 600 }}>Business Course</span>
+                <h4>Tomato Farming</h4>
+                <span>Business Course</span>
               </div>
             </Link>
 
             {/* Start Farming Card */}
-            <Link to="/course/start-farming" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '16px 20px', borderRadius: '8px', backgroundColor: '#f2faf5', textDecoration: 'none', transition: 'var(--transition-normal)' }} className="hero-bottom-card">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '48px', height: '48px', borderRadius: '50%', backgroundColor: '#dcf5e4', color: '#1f5225', fontSize: '1.4rem', fontWeight: 800 }}>₹</div>
+            <Link to="/course/start-farming" className="hero-bottom-card">
+              <div className="hero-card-icon" style={{ color: 'var(--primary)', fontWeight: '800' }}>₹</div>
               <div>
-                <h4 style={{ margin: 0, fontSize: '0.95rem', color: '#1b351e', fontWeight: 700 }}>Start a Farming</h4>
-                <span style={{ fontSize: '0.75rem', color: '#666', fontWeight: 600 }}>Business Course</span>
+                <h4>Start a Farming</h4>
+                <span>Business Course</span>
               </div>
             </Link>
           </div>
@@ -161,15 +162,6 @@ const Home = ({ courses, userEnrollments }) => {
             transform: translateY(-2px);
             background-color: #111 !important;
             border-color: rgba(255,255,255,0.4) !important;
-          }
-          .hero-bottom-card {
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid transparent;
-          }
-          .hero-bottom-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-            border-color: var(--primary-light);
           }
           .video-thumbnail-card:hover .video-img {
             transform: scale(1.06);

@@ -16,7 +16,7 @@ const App = () => {
   const [courses, setCourses] = useState([]);
   const [userEnrollments, setUserEnrollments] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
 
   // Sync theme with document attributes
   useEffect(() => {
